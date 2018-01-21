@@ -921,16 +921,6 @@ temphand[i] = -1;
       return 0;
 
     case great_hall:
-      /*
-      //+1 Card
-      drawCard(currentPlayer, state);
-
-      //+1 Actions
-      state->numActions++;
-
-      //discard card from hand
-      discardCard(handPos, currentPlayer, state, 0);
-      */
       playGreatHall( state, currentPlayer, handPos);
       return 0;
 
