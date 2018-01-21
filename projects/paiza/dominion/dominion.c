@@ -699,6 +699,8 @@ void playSteward( struct gameState * state, int currentPlayer, int handPos, int 
   if (choice1 == 1)
   {
     //+2 cards
+    //should be +2 but I changed to 3 A.P.
+    drawCard(currentPlayer, state);
     drawCard(currentPlayer, state);
     drawCard(currentPlayer, state);
   }
