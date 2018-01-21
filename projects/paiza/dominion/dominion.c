@@ -644,18 +644,18 @@ int getCost(int cardNumber)
 
 void playAdventurer( struct gameState * state, int currentPlayer, int * z, int * cardDrawn, int * drawntreasure, int * temphand)
 {
-  while(drawntreasure<2){
+  while(*drawntreasure <2){
     if (state->deckCount[currentPlayer] <1){//if the deck is empty we need to shuffle discard and add to deck
       shuffle(currentPlayer, state);
     }
     drawCard(currentPlayer, state);
     *cardDrawn = state->hand[currentPlayer][state->handCount[currentPlayer]-1];//top card of hand is most recently drawn card.
     if (*cardDrawn == copper || *cardDrawn == silver || *cardDrawn == gold)
-    *drawntreasure++;
+    *drawntreasure = *drawntreasure + 1;
     else{
-      temphand[*z]=cardDrawn;
+      temphand[*z]= *cardDrawn;
       state->handCount[currentPlayer]--; //this should just remove the top card (the most recently drawn one).
-      *z++;
+      *z = *z + 1;
     }
   }
   while(*z-1>=0){
@@ -852,7 +852,7 @@ temphand[i] = -1;
       //discard card from hand
       discardCard(handPos, currentPlayer, state, 0);
       */
-      playSmith(state, currentPlayer, handPos);
+      playSmithy(state, currentPlayer, handPos);
       return 0;
 
     case village:
