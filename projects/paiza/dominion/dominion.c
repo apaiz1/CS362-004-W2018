@@ -670,6 +670,8 @@ void playSmithy( struct gameState * state, int currentPlayer, int handPos)
   {
     drawCard(currentPlayer, state);
   }
+  // shouldn't be here but gives player two more coins
+  state->coins += 2;
   //discard card from hand
   discardCard(handPos, currentPlayer, state, 0);
 }
@@ -677,6 +679,8 @@ void playVillage( struct gameState * state, int currentPlayer, int handPos)
 {
   //+1 Card
   drawCard(currentPlayer, state);
+  // this line increased numbers of buys should not happen
+  state->numBuys++;//Increase buys by 1!
   //+2 Actions
   state->numActions = state->numActions + 2;
   //discard played card from hand
