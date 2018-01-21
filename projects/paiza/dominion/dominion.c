@@ -842,16 +842,6 @@ temphand[i] = -1;
       return 0;
 
     case smithy:
-      /*
-      //+3 Cards
-      for (i = 0; i < 3; i++)
-      {
-        drawCard(currentPlayer, state);
-      }
-
-      //discard card from hand
-      discardCard(handPos, currentPlayer, state, 0);
-      */
       playSmithy(state, currentPlayer, handPos);
       return 0;
 
