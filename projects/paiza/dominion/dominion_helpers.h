@@ -17,4 +17,5 @@ int * cardDrawn, int * drawntreasure, int * temphand);
 void playSmithy(struct gameState * state, int currentPlayer, int handPos);
 void playVillage(struct gameState * state, int currentPlayer, int handPos);
 void playGreatHall(struct gameState * state, int currentPlayer, int handPos);
+void playSteward( struct gameState * state, int currentPlayer, int handPos, int choice1, int choice2, int choice3);
 #endif
