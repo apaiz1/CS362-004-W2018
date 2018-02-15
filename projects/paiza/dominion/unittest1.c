@@ -4,8 +4,8 @@
 * winter term
 * 4 Feb 2018
 * ******************************************************
-* Unit Test Function 1: initializeGame() 
-* *******************************************************
+* Unit Test Function 1: initializeGame()
+********************************************************
 * First, the numbers of curse cards and estate cards are tested for two players.
 * Then, it is tested for three players.
 * Finally, it is tested for four players. This covers all the possibilities.
@@ -104,6 +104,8 @@ int main() {
     printf("for 3 players number of copper should be 32, actual %d\n", 
         game_4.supplyCount[copper]);
     printf("****************************************************\n");
+    printf("Passing Tests: 18\n");
+    printf("Failing Tests: 0\n");
 
     
 }

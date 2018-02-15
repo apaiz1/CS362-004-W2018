@@ -4,7 +4,7 @@
 * Winter term
 * 4 Feb 2018
 * ******************************************************
-* Unit Test Function 1: getCost
+* Unit Test Function 3: getCost
 * *******************************************************
 * Every cost value will be checked here
 **********************************************************

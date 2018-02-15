@@ -25,7 +25,7 @@
 #include "rngs.h"
 #include <Stdlib.h>
 
-#define TESTCARD "smithy"
+#define TESTCARD "adventurer"
 
 int main() {
     int new_cards = 0;
@@ -41,7 +41,7 @@ int main() {
     int player = 0;
     int other_player = 1;
     /*
-    * The smithy card does not have any options. So it will stay the same
+    * The adventurer card does not have any options. So it will stay the same
     * for this game.
     */
     int choice_1 = 0;
@@ -58,16 +58,32 @@ int main() {
     printf("************************Testing Card: %s ************\n", TESTCARD);
     
     /*
-    * The player should receive three cards for smithy
+    * The player should have atleast two treasure cards in his hand 
     */
     printf("*********************Test One *********************\n");
-    printf("Does the player with smithy get three cards?\n");
 
     memcpy(&test_game, & reg_game, sizeof(struct gameState));
-    cardEffect( smithy, choice_1, choice_2, choice_3, &test_game,
+    cardEffect( adventurer, choice_1, choice_2, choice_3, &test_game,
        hand_pos, &bonus);
-    new_cards = 3;
     extra_coins = 0;
+    int hand_count = test_game.handCount[player];
+    int treasure_sum = 0;
+    int card_drawn = 0;
+    for (int i=0; i < hand_count; i++)
+    {
+        card_drawn = test_game.hand[player][i];
+        if (card_drawn == copper) {
+            card_drawn += 1;
+        }
+        else if (card_drawn == silver) {
+            card_drawn += 1;
+        }
+        else if (card_drawn == gold) {
+            card_drawn += 1;
+        }
+    }
+    printf("number of treasure should be at least two, actual: %d\n", card_drawn);
+    /*
     printf("hand count = %d, expected = %d\n", test_game.handCount[player], 
         reg_game.handCount[player] + new_cards - discarded_cards);
     printf("deck count = %d, expected = %d\n", test_game.deckCount[player],
@@ -78,9 +94,7 @@ int main() {
         + new_cards - discarded_cards);
     assert(test_game.deckCount[player] == reg_game.deckCount[player] 
         - new_cards + shuffled_cards);
-    printf("The third assert failed due to the unequal number of coins.\n");
-    printf("I commented it out though so that the test suite could run");
-    printf("I added this change to the code last week, so it was expectedly wrong\n");
+    */
     printf("********************************************************\n");
     printf("Now I will test that the other players data has not changed\n");
     new_cards = 0;
@@ -100,9 +114,7 @@ int main() {
     printf("Now, I will look at the game state that is shared.");
     printf("coins = %d, expected coins = %d\n", test_game.coins, 
         reg_game.coins + extra_coins);
-    //assert(test_game.coins == reg_game.coins + extra_coins);
-    printf("The third assert failed due to the unequal number of coins.\n");
-    printf("I commented it out though so that the test suite could run");
+    assert(test_game.coins == reg_game.coins + extra_coins);
     printf("numActions = %d, expected actions = %d", test_game.numActions, 
         reg_game.numActions);
     assert(test_game.numActions == reg_game.numActions);

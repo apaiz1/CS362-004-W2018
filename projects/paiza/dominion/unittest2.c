@@ -4,7 +4,7 @@
 * Winterterm
 * 4 Feb 2018
 * ******************************************************
-* Unit Test Function 1: buyCard 
+* Unit Test Function 2: buyCard 
 * *******************************************************
 * First, the function will be make sure that with less than 1
 numBuys it returns -1.

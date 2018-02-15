@@ -4,16 +4,17 @@
 * Spring term
 * 4 Feb 2018
 * ******************************************************
-* First Test of Dominion card: smithy 
+* First Test of Dominion card: village 
 * *******************************************************
 * The tests occur in 4 broad categories
-* 1) Check the state of the first player to gain three cards.
+* 1) Check the state of the first player to gain a card.
 * 2) Check the state of the other player
 * 3) Check the shared state of the two players.
 * 4) Check the kingdom and victory cards.
 *
 *
 * This file was inspired by the samples provided for homework.
+* The base came from paiz_card_Test_1.c.
 **********************************************************
 */
 

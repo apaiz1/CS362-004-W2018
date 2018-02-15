@@ -4,7 +4,7 @@
 * Winter term
 * 4 Feb 2018
 * ******************************************************
-* Unit Test Function 4: buyCard 
+* Unit Test Function 4: playCard 
 * *******************************************************
 * First, it will make sure it doesn't work if phase is not 0.
 * Then, it will make sure it doesn't work if the actions are less than 1.

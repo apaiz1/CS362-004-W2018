@@ -12,7 +12,7 @@ Implementation of testme for quiz
 char inputChar()
 {
   char chars[] = {'[','(','{',' ','a','x','}',')',']','r','e','s','t'};
-  int rand_int = rand()% 13;
+  int rand_int = rand()% 14;
   rand_int -= 1;
     return chars[rand_int];
 }
@@ -59,12 +59,6 @@ void testme()
       printf("error ");
       exit(200);
     }
-    /*
-    if(tcCount == 5)
-    {
-      break;
-    }
-    */
   }
 }
 
