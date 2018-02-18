@@ -1,4 +1,4 @@
-CFLAGS = -Wall -fpic -coverage -lm
+CFLAGS = -Wall -fpic -coverage -lm 
 
 rngs.o: rngs.h rngs.c
 	gcc -c rngs.c -g  $(CFLAGS)
@@ -44,6 +44,12 @@ paiz_test_card_3: paiz_card_test_3.c dominion.o rngs.o
 paiz_test_card_4: paiz_card_test_4.c dominion.o rngs.o
 	gcc -o paiz_test_card_4 -g paiz_card_test_4.c dominion.o rngs.o $(CFLAGS)
 	./paiz_test_card_4
+
+random_test_adventurer: randomtestadventurer.c dominion.o rngs.o
+	gcc -o randomtestadventurer -g randomtestadventurer.c dominion.o rngs.o $(CFLAGS)
+	./randomtestadventurer &> randomtestadventurer.out
+	gcov randomtestadventurer.c >> randomtestadventurer.out
+
 
 unittest1: unittest1.c dominion.o rngs.o
 	gcc -o unittest1 -g unittest1.c dominion.o rngs.o $(CFLAGS)

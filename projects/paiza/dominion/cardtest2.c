@@ -4,7 +4,7 @@
 * Spring term
 * 4 Feb 2018
 * ******************************************************
-* First Test of Dominion card: smithy 
+* First Test of Dominion card: adventurer 
 * *******************************************************
 * The tests occur in 4 broad categories
 * 1) Check the state of the first player to gain three cards.
