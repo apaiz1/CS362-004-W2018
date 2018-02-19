@@ -33,6 +33,18 @@ int check_village( int player, struct gameState * post) {
     * Make sure hand count doesn't change because you add but discard current 
     */
     assert(post->handCount[player] == before.handCount[player]  );
+    /*
+    * number of buys is different because of a bug I introduced
+    */
+    assert(post->numBuys == before.numBuys +1);
+    /*
+    * check that the number of actions was increased by 2
+    */
+    assert(post->numActions == before.numActions + 2);
+    /*
+    * these values shouldn't have changed
+    */
+    assert(post->coins == before.coins);
     return 0;
 }
 

@@ -33,6 +33,16 @@ int check_great_hall( int player, struct gameState * post) {
     * Make sure hand count doesn't change because you add but discard current 
     */
     assert(post->handCount[player] == before.handCount[player]  );
+    /*
+    * Some other values will be checked here.
+    */
+    assert(post->coins == before.coins);
+    assert(post->numBuys == before.numBuys);
+    /*
+    *this value is two instead of one because the code is changed
+    *it is a bug really
+    */
+    assert(post->numActions == before.numActions + 2);
     return 0;
 }
 
