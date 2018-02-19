@@ -645,7 +645,6 @@ int getCost(int cardNumber)
 void playAdventurer( struct gameState * state, int currentPlayer, int * z, int * cardDrawn, int * drawntreasure, int * temphand)
 {
   while(*drawntreasure <2){
-    printf("made it inside play adventurer\n");
     if (state->deckCount[currentPlayer] <1){//if the deck is empty we need to shuffle discard and add to deck
       shuffle(currentPlayer, state);
     }
