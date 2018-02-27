@@ -1,4 +1,4 @@
-CFLAGS = -Wall -fpic -coverage -lm
+CFLAGS = -Wall -fpic -coverage -lm 
 
 rngs.o: rngs.h rngs.c
 	gcc -c rngs.c -g  $(CFLAGS)
@@ -29,84 +29,92 @@ runtests: testDrawCard
 	gcov dominion.c >> unittestresult.out
 	cat dominion.c.gcov >> unittestresult.out
 
+paiz_test_card_1: paiz_card_test_1.c dominion.o rngs.o
+	gcc -o paiz_test_card_1 -g paiz_card_test_1.c dominion.o rngs.o $(CFLAGS)
+	./paiz_test_card_1
 
-player: player.c interface.o
-	gcc -o player player.c -g  dominion.o rngs.o interface.o $(CFLAGS)
+paiz_test_card_2: paiz_card_test_2.c dominion.o rngs.o
+	gcc -o paiz_test_card_2 -g paiz_card_test_2.c dominion.o rngs.o $(CFLAGS)
+	./paiz_test_card_2
 
-unitTest1: dominion.o unittest1.c
-	gcc -o unittest1 unittest1.c -g dominion.o rngs.o $(CFLAGS)
+paiz_test_card_3: paiz_card_test_3.c dominion.o rngs.o
+	gcc -o paiz_test_card_3 -g paiz_card_test_3.c dominion.o rngs.o $(CFLAGS)
+	./paiz_test_card_3
+
+paiz_test_card_4: paiz_card_test_4.c dominion.o rngs.o
+	gcc -o paiz_test_card_4 -g paiz_card_test_4.c dominion.o rngs.o $(CFLAGS)
+	./paiz_test_card_4
+
+random_test_adventurer: randomtestadventurer.c dominion.o rngs.o
+	gcc -o randomtestadventurer -g randomtestadventurer.c dominion.o rngs.o $(CFLAGS)
+	./randomtestadventurer < seed.txt &> randomtestadventurer.out
+	gcov -bcf dominion.c >> randomtestadventurer.out
+	cat dominion.c.gcov >> randomtestadventurer.out
+
+random_test_card_1: randomtestcard1.c dominion.o rngs.o
+	gcc -o randomtestcard1 -g randomtestcard1.c dominion.o rngs.o $(CFLAGS)
+	./randomtestcard1 < seed.txt &> randomtestcard1.out
+	gcov -bcf dominion.c >> randomtestcard1.out
+	cat dominion.c.gcov >> randomtestcard1.out
+
+random_test_card_2: randomtestcard2.c dominion.o rngs.o
+	gcc -o randomtestcard2 -g randomtestcard2.c dominion.o rngs.o $(CFLAGS)
+	./randomtestcard2 < seed.txt &> randomtestcard2.out
+	gcov -bcf dominion.c >> randomtestcard2.out
+	cat dominion.c.gcov >> randomtestcard2.out
+
+unittest1: unittest1.c dominion.o rngs.o
+	gcc -o unittest1 -g unittest1.c dominion.o rngs.o $(CFLAGS)
 	./unittest1 &> unittestresult.out
 	gcov dominion.c >> unittestresult.out
 	cat dominion.c.gcov >> unittestresult.out
 
-unitTest2: dominion.o unittest2.c
-	gcc -o unittest2 unittest2.c -g dominion.o rngs.o $(CFLAGS)
+unittest2: unittest2.c dominion.o rngs.o
+	gcc -o unittest2 -g unittest2.c dominion.o rngs.o $(CFLAGS)
 	./unittest2 >> unittestresult.out
 	gcov dominion.c >> unittestresult.out
 	cat dominion.c.gcov >> unittestresult.out
 
-unitTest3: dominion.o unittest3.c
-	gcc -o unittest3 unittest3.c -g dominion.o rngs.o $(CFLAGS)
+unittest3: unittest3.c dominion.o rngs.o
+	gcc -o unittest3 -g unittest3.c dominion.o rngs.o $(CFLAGS)
 	./unittest3 >> unittestresult.out
 	gcov dominion.c >> unittestresult.out
 	cat dominion.c.gcov >> unittestresult.out
 
-unitTest4: dominion.o unittest4.c
-	gcc -o unittest4 unittest4.c -g dominion.o rngs.o $(CFLAGS)
+unittest4: unittest4.c dominion.o rngs.o
+	gcc -o unittest4 -g unittest4.c dominion.o rngs.o $(CFLAGS)
 	./unittest4 >> unittestresult.out
 	gcov dominion.c >> unittestresult.out
 	cat dominion.c.gcov >> unittestresult.out
 
-cardTest1: dominion.o cardtest1.c
-	gcc -o cardtest1 cardtest1.c -g dominion.o rngs.o $(CFLAGS)
+cardtest1: cardtest1.c dominion.o rngs.o
+	gcc -o cardtest1 -g cardtest1.c dominion.o rngs.o $(CFLAGS)
 	./cardtest1 >> unittestresult.out
 	gcov dominion.c >> unittestresult.out
 	cat dominion.c.gcov >> unittestresult.out
 
-cardTest2: dominion.o cardtest2.c
-	gcc -o cardtest2 cardtest2.c -g dominion.o rngs.o $(CFLAGS)
+cardtest2: cardtest2.c dominion.o rngs.o
+	gcc -o cardtest2 -g cardtest2.c dominion.o rngs.o $(CFLAGS)
 	./cardtest2 >> unittestresult.out
 	gcov dominion.c >> unittestresult.out
 	cat dominion.c.gcov >> unittestresult.out
 
-cardTest3: dominion.o cardtest3.c
-	gcc -o cardtest3 cardtest3.c -g dominion.o rngs.o $(CFLAGS)
+cardtest3: cardtest3.c dominion.o rngs.o
+	gcc -o cardtest3 -g cardtest3.c dominion.o rngs.o $(CFLAGS)
 	./cardtest3 >> unittestresult.out
 	gcov dominion.c >> unittestresult.out
 	cat dominion.c.gcov >> unittestresult.out
 
-cardTest4: dominion.o cardtest4.c
-	gcc -o cardtest4 cardtest4.c -g dominion.o rngs.o $(CFLAGS)
+cardtest4: cardtest4.c dominion.o rngs.o
+	gcc -o cardtest4 -g cardtest4.c dominion.o rngs.o $(CFLAGS)
 	./cardtest4 >> unittestresult.out
 	gcov dominion.c >> unittestresult.out
 	cat dominion.c.gcov >> unittestresult.out
 
-randomTestCard1: dominion.o randomtestcard1.c
-	gcc -o randomtestcard1 randomtestcard1.c -g dominion.o rngs.o $(CFLAGS)
-	rm -rf randomtestcard1.out
-	./randomtestcard1 >> randomtestcard1.out
-	gcov dominion.c >> randomtestcard1.out
-	cat dominion.c.gcov >> randomtestcard1.out
+player: player.c interface.o
+	gcc -o player player.c -g  dominion.o rngs.o interface.o $(CFLAGS)
 
-randomTestCard2: dominion.o randomtestcard2.c
-	gcc -o randomtestcard2 randomtestcard2.c -g dominion.o rngs.o $(CFLAGS)
-	rm -rf randomtestcard2.out
-	./randomtestcard2 >> randomtestcard2.out
-	gcov dominion.c >> randomtestcard2.out
-	cat dominion.c.gcov >> randomtestcard2.out
-
-randomTestAdventurer: dominion.o randomtestadventurer.c
-	gcc -o randomtestadventurer randomtestadventurer.c -g dominion.o rngs.o $(CFLAGS)
-	rm -rf randomtestadventurer.out
-	./randomtestadventurer >> randomtestadventurer.out
-	gcov dominion.c >> randomtestadventurer.out
-	cat dominion.c.gcov >> randomtestadventurer.out
-
-tests: unitTest1 unitTest2 unitTest3 unitTest4 cardTest1 cardTest2 cardTest3 cardTest4
-
-randomtests: randomTestCard1 randomTestCard2 randomTestAdventurer
-
-all: playdom player testDrawCard testBuyCard badTestDrawCard unitTest1 unitTest2 unitTest3 unitTest4 cardTest1 cardTest2 cardTest3 cardTest4 randomTestCard1 randomTestCard2 randomTestAdventurer
+all: playdom player testDrawCard testBuyCard badTestDrawCard unittest1 unittest2 unittest3 unittest4 cardtest1 cardtest2 cardtest3 cardtest4
 
 clean:
 	rm -f *.o playdom.exe playdom player player.exe  *.gcov *.gcda *.gcno *.so *.out testDrawCard testDrawCard.exe
