@@ -65,27 +65,27 @@ random_test_card_2: randomtestcard2.c dominion.o rngs.o
 
 unittest1: unittest1.c dominion.o rngs.o
 	gcc -o unittest1 -g unittest1.c dominion.o rngs.o $(CFLAGS)
-	./unittest1 &> unittestresult.out
-	gcov dominion.c >> unittestresult.out
-	cat dominion.c.gcov >> unittestresult.out
+	./unittest1 &> unittestresult1.out
+	gcov dominion.c >> unittestresult1.out
+	cat dominion.c.gcov >> unittestresult1.out
 
 unittest2: unittest2.c dominion.o rngs.o
 	gcc -o unittest2 -g unittest2.c dominion.o rngs.o $(CFLAGS)
-	./unittest2 >> unittestresult.out
-	gcov dominion.c >> unittestresult.out
-	cat dominion.c.gcov >> unittestresult.out
+	./unittest2 &> unittestresult2.out
+	gcov dominion.c >> unittestresult2.out
+	cat dominion.c.gcov >> unittestresult2.out
 
 unittest3: unittest3.c dominion.o rngs.o
 	gcc -o unittest3 -g unittest3.c dominion.o rngs.o $(CFLAGS)
-	./unittest3 >> unittestresult.out
-	gcov dominion.c >> unittestresult.out
-	cat dominion.c.gcov >> unittestresult.out
+	./unittest3 &> unittestresult3.out
+	gcov dominion.c >> unittestresult3.out
+	cat dominion.c.gcov >> unittestresult3.out
 
 unittest4: unittest4.c dominion.o rngs.o
 	gcc -o unittest4 -g unittest4.c dominion.o rngs.o $(CFLAGS)
-	./unittest4 >> unittestresult.out
-	gcov dominion.c >> unittestresult.out
-	cat dominion.c.gcov >> unittestresult.out
+	./unittest4 &> unittestresult4.out
+	gcov dominion.c >> unittestresult4.out
+	cat dominion.c.gcov >> unittestresult4.out
 
 cardtest1: cardtest1.c dominion.o rngs.o
 	gcc -o cardtest1 -g cardtest1.c dominion.o rngs.o $(CFLAGS)
@@ -115,6 +115,8 @@ player: player.c interface.o
 	gcc -o player player.c -g  dominion.o rngs.o interface.o $(CFLAGS)
 
 all: playdom player testDrawCard testBuyCard badTestDrawCard unittest1 unittest2 unittest3 unittest4 cardtest1 cardtest2 cardtest3 cardtest4
+
+paiza_test: unittest1 unittest2 unittest3 unittest4 cardtest1 cardtest2 cardtest3 cardtest4 random_test_adventurer random_test_card_1 random_test_card_2
 
 clean:
 	rm -f *.o playdom.exe playdom player player.exe  *.gcov *.gcda *.gcno *.so *.out testDrawCard testDrawCard.exe

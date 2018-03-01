@@ -40,9 +40,9 @@ int check_great_hall( int player, struct gameState * post) {
     assert(post->numBuys == before.numBuys);
     /*
     *this value is two instead of one because the code is changed
-    *it is a bug really
+    *CHANGED back to 1 because kevin does not have this bug
     */
-    assert(post->numActions == before.numActions + 2);
+    assert(post->numActions == before.numActions + 1);
     return 0;
 }
 
