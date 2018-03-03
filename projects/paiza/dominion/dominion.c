@@ -694,7 +694,8 @@ void playGreatHall( struct gameState * state, int currentPlayer, int handPos)
 
       //+1 Actions
       // should be 1 but I changed to two actions. A.P.
-      state->numActions = state->numActions + 2;
+      // changed back to one after it was reviewed in my debugger
+      state->numActions = state->numActions + 1;
 
       //discard card from hand
       discardCard(handPos, currentPlayer, state, 0);

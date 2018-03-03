@@ -1,3 +1,36 @@
- I found a bug at line 1345 of the dominion.c file through my random tests. It should have two actions instead of 4.
+ I found a bug at line 1345 of the dominion.c file through my random tests. 
+ It should have two actions instead of 4.
  It crashed my asserts, so I had to change my random test.
  I also found a bug at line 1331 of dominion.c through visual inspection since smithy was not drawing enough cards.
+ My reports follow these lines.
+ ****************************************************************************
+ ****************************************************************************
+ Title:
+ Incorrect Number of Actions in villagePlay()
+ Class:
+ Serious bug
+ Date: 2018-03-04
+ Reported By: Adam Paiz
+ Email: paiza@oregonstate.edu
+
+ Product: dominion.c
+ OS: OS X
+ Is it Reproducible: Yes
+ ****************************************************************************
+ ****************************************************************************
+ Description:
+ The number of actions is increased by four instead of by two.
+
+ ****************************************************************************
+ Steps to Reproduce:
+ Run the code and the debugger and set a breakpoint at those lines. 
+ Track the number of actions before and after that line.
+
+ ****************************************************************************
+ Expected Results:
+ The number of actions should be increased by two.
+ 
+ ****************************************************************************
+ ****************************************************************************
+
+ 
