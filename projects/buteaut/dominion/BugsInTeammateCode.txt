@@ -23,7 +23,7 @@
 
  ****************************************************************************
  Steps to Reproduce:
- Run the code and the debugger and set a breakpoint at those lines. 
+ Run the code and the debugger and set a breakpoint at 1345.
  Track the number of actions before and after that line.
 
  ****************************************************************************
@@ -31,6 +31,40 @@
  The number of actions should be increased by two.
  
  ****************************************************************************
+ Actual Result:
+ The number of actions is increased by four.
  ****************************************************************************
 
  
+ ****************************************************************************
+ ****************************************************************************
+ Title:
+ Incorrect Number of cards drawn in smithyPlay
+ Class:
+ Serious bug
+ Date: 2018-03-04
+ Reported By: Adam Paiz
+ Email: paiza@oregonstate.edu
+
+ Product: dominion.c
+ OS: OS X
+ Is it Reproducible: Yes
+ ****************************************************************************
+ ****************************************************************************
+ Description:
+ Only one card is drawn instead of three cards.
+
+ ****************************************************************************
+ Steps to Reproduce:
+ Run the code and the debugger and set a breakpoint at 1331.   
+ Track the number of actions before and after that line.
+
+ ****************************************************************************
+ Expected Results:
+ The number of cards should be increased by three.
+ 
+ ****************************************************************************
+ Actual Result:
+ The number of cards is increased by one.
+ ****************************************************************************
+ ****************************************************************************
