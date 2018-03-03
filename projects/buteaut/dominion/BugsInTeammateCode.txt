@@ -1,0 +1,2 @@
+ I found a bug at line 1345 of the dominion.c file through my random tests. It should have two actions instead of 4.
+ It crashed my asserts, so I had to change my random test.
