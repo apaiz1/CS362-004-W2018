@@ -4,9 +4,9 @@ import junit.framework.TestCase;
 
 import java.util.concurrent.ThreadLocalRandom;
 
-// Adam Paiz
-// Thomas Buteau
-// Jacob Skinner
+// Adam Paiz -paiza
+// Thomas John Buteau - buteaut
+// Jacob Skinner- skinnjac
 // CS 362
 // Final Project Part B
 // 2018-03-
