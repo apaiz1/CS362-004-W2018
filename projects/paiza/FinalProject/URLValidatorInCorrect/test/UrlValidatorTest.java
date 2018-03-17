@@ -86,21 +86,45 @@ public class UrlValidatorTest extends TestCase {
            if (i % 2 == 0) { //even
                String test = scheme_good[rand(0, 2)] + authority_valid[rand(0, 2)] + port_valid[rand(0, 1)];
                System.out.print("Testing: " + test + " Should pass.\n");
-               if (urlVal.isValid(test)) {
-                   System.out.print(" Passed\n\n");
-               } else {
-                   System.out.print(" Failed\n\n");
-                   failed_tests++;
+               try{
+                   if (urlVal.isValid(test)) {
+                       System.out.print(" Passed\n\n");
+                   } else {
+                       System.out.print(" Failed\n\n");
+                       failed_tests++;
+                   }
+               } catch(IllegalArgumentException ex) {
+                   System.out.println("\n Test: " + test + " Caused an IllegalArgumentException that was caught.");
+                   System.out.print("This test is Failed.\n");
+               } catch(ExceptionInInitializerError ex) {
+                   System.out.println("\n Test: " + test + " Caused an ExceptionInInitializerError that was caught.");
+                   System.out.print("This test is Failed.\n");
+               } catch(NoClassDefFoundError ex){
+                   System.out.println("\n Test: " + test + " Caused an NoClassDefFoundError that was caught.");
+                   System.out.print("This test is Failed.\n");
                }
+
            } else {
                String test = scheme_good[rand(0, 2)] + authority_invalid[rand(0, 2)] + port_valid[rand(0, 1)];
                System.out.print("Testing: " + test + " Should fail.\n");
-               if (urlVal.isValid(test)) {
-                   System.out.print(" Passed\n\n");
-                   failed_tests++; //Expected outcome is a failed test so this is an error to report
-               } else {
-                   System.out.print(" Failed\n\n");
+               try{
+                   if (urlVal.isValid(test)) {
+                       System.out.print(" Passed\n\n");
+                       failed_tests++; //Expected outcome is a failed test so this is an error to report
+                   } else {
+                       System.out.print(" Failed\n\n");
+                   }
+               }catch(IllegalArgumentException ex){
+                   System.out.println("\n Test: " + test + " Caused an IllegalArgumentException that was caught.");
+                   System.out.print("This test is Failed.\n");
+               }catch(ExceptionInInitializerError ex){
+                   System.out.println("\n Test: " + test + " Caused an ExceptionInInitializerError that was caught.");
+                   System.out.print("This test is Failed.\n");
+               }catch(NoClassDefFoundError ex){
+                   System.out.println("\n Test: " + test + " Caused an NoClassDefFoundError that was caught.");
+                   System.out.print("This test is Failed.\n");
                }
+
            }
        }
    }
