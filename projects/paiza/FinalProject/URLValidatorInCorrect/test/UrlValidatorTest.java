@@ -2,6 +2,7 @@
 
 import junit.framework.TestCase;
 
+import java.util.ArrayList;
 import java.util.concurrent.ThreadLocalRandom;
 
 // Adam Paiz -paiza
@@ -9,7 +10,7 @@ import java.util.concurrent.ThreadLocalRandom;
 // Jacob Skinner- skinnjac
 // CS 362
 // Final Project Part B
-// 2018-03-
+// 2018-03-19
 
 
 
@@ -72,6 +73,9 @@ public class UrlValidatorTest extends TestCase {
    {
    //Our manually written urls are checked here.
    //Note: many urls failed the assertion, so we used the helper function with them.
+       System.out.println("*************************************************************");
+       System.out.print("Starting manual testing\n");
+       System.out.println("*************************************************************");
        UrlValidator urlChecker = new UrlValidator(null,null,UrlValidator.ALLOW_ALL_SCHEMES );
 
        assertTrue(urlChecker.isValid("http://www.oregonstate.edu"));
@@ -121,7 +125,9 @@ public class UrlValidatorTest extends TestCase {
    //The beginning of this section was written by Thomas.
    //Adam added the exceptions.
    UrlValidator urlVal = new UrlValidator(null, null, 1);
+   System.out.println("*************************************************************");
    System.out.print("Starting first partition test.\n");
+   System.out.println("*************************************************************");
 
    String[] scheme_good = {"http://", "ftp://", "https://"};
    String[] authority_valid = {"www.google.com", "www.oregonstate.edu", "www.stackoverflow.com"};
@@ -185,6 +191,51 @@ public class UrlValidatorTest extends TestCase {
    public void testIsValid()
    {
 	   //You can use this function for programming based testing
+       System.out.println("*************************************************************");
+       System.out.println("Starting Programmatic Testing");
+       System.out.println("*************************************************************");
+       UrlValidator urlVal = new UrlValidator(null,null,1);
+       String[] schemes = {"http://", "ftp://", "http://",""};
+       String[] authority = {"www.google.com", "www.oregonstate.edu","google.com","oregonstate.edu"};
+       String[] port = {":80",":443",""};
+       String[] path = {"", "/one","/one/two"};
+       int failedTests = 0;
+       int passedTests = 0;
+       ArrayList<String> failedUrls = new ArrayList<String>();
+       ArrayList<String> failedUrlException = new ArrayList<String>();
+       for(int i = 0; i< 1000; i++){
+           String test = schemes[rand(0,3)] + authority[rand(0,2)] + port[rand(0,2)] +path[rand(0,2)];
+           try{
+               if (urlVal.isValid(test)){
+                    passedTests += 1;
+               }else{
+                   failedTests += 1;
+                   failedUrls.add(test);
+               }
+           } catch(IllegalArgumentException ex) {
+                   failedTests += 1;
+                   failedUrlException.add(test);
+           } catch(ExceptionInInitializerError ex) {
+                       failedTests += 1;
+                       failedUrlException.add(test);
+           } catch(NoClassDefFoundError ex){
+                       failedTests += 1;
+                       failedUrlException.add(test);
+           }
+       }
+       System.out.println("Passing urls: "+ Integer.toString(passedTests) + ".");
+       System.out.println("Failed urls: "+ Integer.toString(failedTests) + ".");
+       System.out.println("Urls that failed and did not causes exceptions:");
+       for(String name : failedUrls){
+           System.out.println(name);
+       }
+       System.out.println("Urls that failed and caused an exception:");
+       for(String name : failedUrlException){
+           System.out.println(name);
+       }
+
+       System.out.println("Tests Complete");
+       System.out.println("*************************************************************");
 
    }
 
