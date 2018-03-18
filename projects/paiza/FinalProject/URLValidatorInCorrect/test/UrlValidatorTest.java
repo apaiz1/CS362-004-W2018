@@ -22,11 +22,56 @@ public class UrlValidatorTest extends TestCase {
       super(testName);
    }
 
-   
-   
+
+    public void miscTests()
+    {
+    // This function has random tests that did not fit in the other three groups.
+        UrlValidator urlChecker = new UrlValidator(null,null,UrlValidator.ALLOW_ALL_SCHEMES );
+        String httpsTest = "http://www.google.com/hope/brave";
+        try{
+            if (urlChecker.isValid(httpsTest)) {
+                System.out.print(" Passed\n\n");
+            } else {
+                System.out.print(" Failed\n\n");
+            }
+        }catch(IllegalArgumentException ex){
+            System.out.println("\n Test: " + httpsTest + " Caused an IllegalArgumentException that was caught.");
+            System.out.print("This test is Failed.\n");
+            ex.printStackTrace();
+        }catch(ExceptionInInitializerError ex){
+            System.out.println("\n Test: " + httpsTest + " Caused an ExceptionInInitializerError that was caught.");
+            System.out.print("This test is Failed.\n");
+            ex.printStackTrace();
+        }
+        System.out.println(urlChecker.isValid("http://www.oregonstate.edu/departments/biology"));
+
+    }
+    public void checkUrl(UrlValidator urlChecker, String url, String expected)
+    {
+    //This function will use a standard check for a manual URL
+        try {
+            System.out.print("\nCheck of " + url + ".");
+            if (urlChecker.isValid(url)) {
+                System.out.print(" true. PASSED\n");
+            } else {
+                System.out.print(" false. FAILED\n");
+                System.out.println("This failed so we did not use an assertion");
+                System.out.println("This was "+ expected + ".");
+            }
+        }catch(IllegalArgumentException ex){
+            System.out.println("\n Test: " + url + " Caused an IllegalArgumentException that was caught.");
+            System.out.print("This test is Failed.\n");
+            ex.printStackTrace();
+        }catch(ExceptionInInitializerError ex){
+            System.out.println("\n Test: " + url + " Caused an ExceptionInInitializerError that was caught.");
+            System.out.print("This test is Failed.\n");
+            ex.printStackTrace();
+        }
+    }
    public void testManualTest()
    {
-    //You can use this function to implement your manual testing
+   //Our manually written urls are checked here.
+   //Note: many urls failed the assertion, so we used the helper function with them.
        UrlValidator urlChecker = new UrlValidator(null,null,UrlValidator.ALLOW_ALL_SCHEMES );
 
        assertTrue(urlChecker.isValid("http://www.oregonstate.edu"));
@@ -39,27 +84,26 @@ public class UrlValidatorTest extends TestCase {
        assertTrue(urlChecker.isValid("http://oregonstate.es"));
        assertTrue(urlChecker.isValid("http://localhost"));
        assertTrue(urlChecker.isValid("http://localhost/"));
-       System.out.println(urlChecker.isValid("http://www.oregonstate.edu/departments/biology"));
-       /*
-       assertTrue(urlChecker.isValid("https://www.oregonstate.edu"));
-       assertTrue(urlChecker.isValid("https://www.oregonstate.edu/future"));
-
-       assertTrue(urlChecker.isValid("https://www.oregonstate.edu/"));
-       assertTrue(urlChecker.isValid("https://oregonstate.edu"));
-       assertTrue(urlChecker.isValid("https://oregonstate.io"));
-       assertTrue(urlChecker.isValid("https://localhost"));
-       assertTrue(urlChecker.isValid("https://localhost/"));
-
-       assertTrue(urlChecker.isValid("http://www.oregonstate.edu/future/"));
-       assertTrue(urlChecker.isValid("http://www.oregonstate.edu/future/time"));
-       assertTrue(urlChecker.isValid("http://www.oregonstate.edu/"));
-*/
-       /*
-       assertFalse(urlChecker.isValid("h3://www.oregonstate.edu/"));
-       assertFalse(urlChecker.isValid("h3://www.oregonstate.edu/future"));
-       assertFalse(urlChecker.isValid("h3://www.oregonstate.edu/future/"));
-       assertFalse(urlChecker.isValid("h3://www.oregonstate.edu/future/time"));
-       */
+       assertTrue(urlChecker.isValid("http://www.github.com"));
+       assertTrue(urlChecker.isValid("http://ww3.github.com"));
+       assertTrue(urlChecker.isValid("http://ww3.github.codfgon"));
+       checkUrl(urlChecker, "google.com", "not expected");
+       checkUrl(urlChecker, "www.google.com", "not expected");
+       checkUrl(urlChecker, "www.google.com", "not expected");
+       checkUrl(urlChecker, "google.com:80","not expected");
+       checkUrl(urlChecker, "www.google.com:80","not expected");
+       assertTrue(urlChecker.isValid("http://www.google.co.uk"));
+       checkUrl(urlChecker, "htpp://www.google.com:80","expected");
+       assertTrue(urlChecker.isValid("http://www.url.com"));
+       assertTrue(urlChecker.isValid("http://url.com"));
+       checkUrl(urlChecker, "www.url.com","not expected");
+       checkUrl(urlChecker, "url.com","not expected");
+       assertTrue(urlChecker.isValid("http://www.url.com/"));
+       assertTrue(urlChecker.isValid("http://www.url.com/example"));
+       checkUrl(urlChecker, "http://www.url.com:port","expected");
+       assertTrue(urlChecker.isValid("http://url"));
+       assertTrue(urlChecker.isValid("http://www.url.nothing"));
+       assertTrue(urlChecker.isValid("http://www.url"));
 
    }
     //Function to generate random number taken from
@@ -72,62 +116,65 @@ public class UrlValidatorTest extends TestCase {
 
     public void testYourFirstPartition()
    {
-	 //You can use this function to implement your First Partition testing	   
-       //This partition tests known good scheme and ports against a mix of valid and invalid authorities
-       UrlValidator urlVal = new UrlValidator(null, null, 1);
-       System.out.print("Starting first partition test.\n");
+   //You can use this function to implement your First Partition testing
+   //This partition tests known good scheme and ports against a mix of valid and invalid authorities
+   //The beginning of this section was written by Thomas.
+   //Adam added the exceptions.
+   UrlValidator urlVal = new UrlValidator(null, null, 1);
+   System.out.print("Starting first partition test.\n");
 
-       String[] scheme_good = {"http://", "ftp://", "https://"};
-       String[] authority_valid = {"www.google.com", "www.oregonstate.edu", "www.stackoverflow.com"};
-       String[] authority_invalid = {"wtf.google.fail", "p2w.lootboxes.bad", "HanShotFirst.Disney.gov"};
-       String[] port_valid = {":80", ":443"};
-       int failed_tests = 0;
-       for(int i = 0; i < 10; i++) {
-           if (i % 2 == 0) { //even
-               String test = scheme_good[rand(0, 2)] + authority_valid[rand(0, 2)] + port_valid[rand(0, 1)];
-               System.out.print("Testing: " + test + " Should pass.\n");
-               try{
-                   if (urlVal.isValid(test)) {
-                       System.out.print(" Passed\n\n");
-                   } else {
-                       System.out.print(" Failed\n\n");
-                       failed_tests++;
-                   }
-               } catch(IllegalArgumentException ex) {
-                   System.out.println("\n Test: " + test + " Caused an IllegalArgumentException that was caught.");
-                   System.out.print("This test is Failed.\n");
-               } catch(ExceptionInInitializerError ex) {
-                   System.out.println("\n Test: " + test + " Caused an ExceptionInInitializerError that was caught.");
-                   System.out.print("This test is Failed.\n");
-               } catch(NoClassDefFoundError ex){
-                   System.out.println("\n Test: " + test + " Caused an NoClassDefFoundError that was caught.");
-                   System.out.print("This test is Failed.\n");
+   String[] scheme_good = {"http://", "ftp://", "https://"};
+   String[] authority_valid = {"www.google.com", "www.oregonstate.edu", "www.stackoverflow.com"};
+   String[] authority_invalid = {"wtf.google.fail", "p2w.lootboxes.bad", "HanShotFirst.Disney.gov"};
+   String[] port_valid = {":80", ":443"};
+   int failed_tests = 0;
+   for(int i = 0; i < 10; i++) {
+       if (i % 2 == 0) { //even
+           String test = scheme_good[rand(0, 2)] + authority_valid[rand(0, 2)] + port_valid[rand(0, 1)];
+           System.out.print("Testing: " + test + " Should pass.\n");
+           try{
+               if (urlVal.isValid(test)) {
+                   System.out.print(" Passed\n\n");
+               } else {
+                   System.out.print(" Failed\n\n");
+                   failed_tests++;
                }
-
-           } else {
-               String test = scheme_good[rand(0, 2)] + authority_invalid[rand(0, 2)] + port_valid[rand(0, 1)];
-               System.out.print("Testing: " + test + " Should fail.\n");
-               try{
-                   if (urlVal.isValid(test)) {
-                       System.out.print(" Passed\n\n");
-                       failed_tests++; //Expected outcome is a failed test so this is an error to report
-                   } else {
-                       System.out.print(" Failed\n\n");
-                   }
-               }catch(IllegalArgumentException ex){
-                   System.out.println("\n Test: " + test + " Caused an IllegalArgumentException that was caught.");
-                   System.out.print("This test is Failed.\n");
-               }catch(ExceptionInInitializerError ex){
-                   System.out.println("\n Test: " + test + " Caused an ExceptionInInitializerError that was caught.");
-                   System.out.print("This test is Failed.\n");
-               }catch(NoClassDefFoundError ex){
-                   System.out.println("\n Test: " + test + " Caused an NoClassDefFoundError that was caught.");
-                   System.out.print("This test is Failed.\n");
-               }
-
+           } catch(IllegalArgumentException ex) {
+               System.out.println("\n Test: " + test + " Caused an IllegalArgumentException that was caught.");
+               System.out.print("This test is Failed.\n");
+           } catch(ExceptionInInitializerError ex) {
+               System.out.println("\n Test: " + test + " Caused an ExceptionInInitializerError that was caught.");
+               System.out.print("This test is Failed.\n");
+           } catch(NoClassDefFoundError ex){
+               System.out.println("\n Test: " + test + " Caused an NoClassDefFoundError that was caught.");
+               System.out.print("This test is Failed.\n");
            }
+
+       } else {
+           String test = scheme_good[rand(0, 2)] + authority_invalid[rand(0, 2)] + port_valid[rand(0, 1)];
+           System.out.print("Testing: " + test + " Should fail.\n");
+           try{
+               if (urlVal.isValid(test)) {
+                   System.out.print(" Passed\n\n");
+                   failed_tests++; //Expected outcome is a failed test so this is an error to report
+               } else {
+                   System.out.print(" Failed\n\n");
+               }
+           }catch(IllegalArgumentException ex){
+               System.out.println("\n Test: " + test + " Caused an IllegalArgumentException that was caught.");
+               System.out.print("This test is Failed.\n");
+           }catch(ExceptionInInitializerError ex){
+               System.out.println("\n Test: " + test + " Caused an ExceptionInInitializerError that was caught.");
+               System.out.print("This test is Failed.\n");
+           }catch(NoClassDefFoundError ex){
+               System.out.println("\n Test: " + test + " Caused an NoClassDefFoundError that was caught.");
+               System.out.print("This test is Failed.\n");
+           }
+
        }
    }
+
+}
    
    public void testYourSecondPartition(){
 		 //You can use this function to implement your Second Partition testing	   
@@ -140,6 +187,7 @@ public class UrlValidatorTest extends TestCase {
 	   //You can use this function for programming based testing
 
    }
+
 
    public static void main(){
        UrlValidatorTest ourTest = new UrlValidatorTest("group tests");
